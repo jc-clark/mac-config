@@ -1,1 +1,1 @@
-# mac-config
+# Joe's Mac config files
