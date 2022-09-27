@@ -108,7 +108,6 @@ gpoh() {
 
 #### For GitHub: e.g gcpr 12345.
 #### Requires GitHub CLI: https://github.com/cli/cli
-#### Replaces old complicated function. For old function, see https://github.com/lucascosti/zshrc/blob/b371ff5404e47990d37be72c6f4c90618f019445/.zshrc#L215-L241
 gcpr() { gh pr checkout $1; }
 
 # Checkout the default branch
