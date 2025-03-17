@@ -1,40 +1,37 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+# Path to your Oh My Zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="fwalch"
 
+zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
 
 ###### custom stuff below #########
 
 # Aliases
 
-## Regular aliases
-### zsh sudo last command:
+## zsh
+### zsh redo the last command with sudo
 alias ffs='sudo $(fc -ln -1)'
+### open zshrc file
+alias zshconfig="open -e ~/.zshrc"
 
-### Brew aliases
+### Brew
 alias bi='brew install'
 alias br='brew uninstall'
 alias bupd='brew update'
 alias bupg='brew upgrade'
 
-### Git aliases
+### Git
 alias g='git'
 alias gfu='git fetch upstream'
 alias gfo='git fetch origin'
@@ -48,7 +45,7 @@ alias gcommend='git add -A && git commit --amend --no-edit'
 alias gm='git merge'
 alias gcp='git cherry-pick'
 
-### Directory aliases
+### Directory
 alias cdr='cd ~/Repos/'
 alias cddi='cd ~/Repos/docs-internal'
 alias cdcs='cd ~/Repos/docs-strategy'
