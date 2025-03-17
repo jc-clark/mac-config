@@ -53,6 +53,10 @@ alias cdcs='cd ~/Repos/docs-strategy'
 ####### git functions ########
 #### Requires GitHub CLI: https://github.com/cli/cli
 
+# Ensure no alias or function exists for `gcm` before defining the function
+unalias gcm 2>/dev/null
+unset -f gcm 2>/dev/null
+
 # Function to get the default branch of the current repository
 git_default_branch() {
   gh repo view --json defaultBranchRef -q '.defaultBranchRef.name'
@@ -79,9 +83,6 @@ gpoh() {
   fi
   git push origin HEAD --set-upstream
 }
-
-# Example alias to use the gcm function
-alias checkout_main='gcm'
 
 #### For GitHub: e.g gcpr 12345.
 
