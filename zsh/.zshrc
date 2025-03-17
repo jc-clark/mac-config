@@ -51,27 +51,38 @@ alias cddi='cd ~/Repos/docs-internal'
 alias cdcs='cd ~/Repos/docs-strategy'
 
 ####### git functions ########
+#### Requires GitHub CLI: https://github.com/cli/cli
 
-### Function to make sure I don't push to the default remote branch unless I really mean to 🤦‍♂️
+# Function to get the default branch of the current repository
+git_default_branch() {
+  gh repo view --json defaultBranchRef -q '.defaultBranchRef.name'
+}
+
+# Checkout the default branch
+gcm() {
+  gc $(git_default_branch)
+}
+
+# Push to origin, but warn if on default branch
 gpoh() {
   local CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-  local DEFAULT_BRANCH="main"
+  local DEFAULT_BRANCH=$(git_default_branch)
 
   # check we're not on the default branch
   if [[ $CURRENT_BRANCH == $DEFAULT_BRANCH ]]; then
     print -P "$lcicon_warning$lcicon_warning $FG[009]WARNING: You're about to push to the default branch ($DEFAULT_BRANCH)!$reset_color $lcicon_warning$lcicon_warning"
     vared -p "$lcicon_question Are you sure you want to continue? [y/N] " -c response
-    if ! [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]
-    then
+    if ! [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
       print -P "$lcicon_fail Cancelled. Nothing was done."
       return 1
     fi
   fi
   git push origin HEAD --set-upstream
+}
+
+# Example alias to use the gcm function
+alias checkout_main='gcm'
 
 #### For GitHub: e.g gcpr 12345.
-#### Requires GitHub CLI: https://github.com/cli/cli
-gcpr() { gh pr checkout $1; }
 
-# Checkout the default branch
-# gcm() { gc $(git_default_branch) } 
+gcpr() { gh pr checkout $1; }
